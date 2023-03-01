@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sprites>
+
+  <portal path="objects/outback/portal/" start="idle">
+    <Justify x=".5" y=".5" />
+    <Loop id="idle" path="idle" delay="0.1" frames="0-6"/>
+    <Loop id="directional" path="directional" delay="0.1" frames="0-9"/>
+    <Anim id="teleport" path="teleport" delay="0.1"/>
+  </portal>
+
+</Sprites>

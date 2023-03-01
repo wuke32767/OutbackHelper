@@ -1,0 +1,6 @@
+- Name: OutbackHelper
+  Version: 1.7.0
+  DLL: Code/bin/OutbackHelper.dll
+  Dependencies:
+    - Name: Everest
+      Version: 1.3761.0
