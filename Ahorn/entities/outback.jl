@@ -53,16 +53,14 @@ rotations = Dict{Number, Number}(
 )
 
 for (portalDirection, int) in portalDirections
-    for (colorName, color) in colors
-    const placements["Portal ($portalDirection, $colorName) (Outback)"] = Ahorn.EntityPlacement(
+    const placements["Portal ($portalDirection) (Outback)"] = Ahorn.EntityPlacement(
         Portal,
         "point",
         Dict{String, Any}(
-            "readyColor" => colorName,
+            "readyColor" => "Purple",
             "direction" => portalDirection
         )
     )
-    end
 end
 
 Ahorn.editingOptions(entity::Portal) = Dict{String, Any}(
