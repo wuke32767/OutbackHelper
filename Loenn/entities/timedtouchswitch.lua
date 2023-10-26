@@ -23,6 +23,13 @@ for timeName, time in pairs(times) do
     })
 end
 
+tts.fieldInformation = {
+    startDisappearTime = {
+        fieldType = "number",
+        minimumValue = 0
+    }
+}
+
 local containerTexture = "collectables/outback/timedtouchswitch/cont"
 local iconTexture = "collectables/outback/timedtouchswitch/idle00"
 

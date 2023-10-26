@@ -43,7 +43,7 @@ namespace Celeste.Mod.OutbackHelper
 		
 		public TimedTouchSwitch(EntityData data, Vector2 offset) : base(data.Position + offset)
 		{
-			startDisappearTime = (float)data.Enum("startDisappearTime", DisappearTimes.Slow);
+			startDisappearTime = Math.Max(data.Float("startDisappearTime", (float) data.Enum("startDisappearTime", DisappearTimes.Slow)), 0f);
             icon = new Sprite(GFX.Game, "collectables/outback/timedtouchswitch/idle");
             Remove(Get<Sprite>());
             Add(icon);
