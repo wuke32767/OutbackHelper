@@ -58,7 +58,8 @@ for i, j in pairs(directions) do
         data = {
             ["readyColor"] = "Purple",
             direction = i,
-            cooldownTimer = 0.0
+            cooldownTimer = 0.0,
+            fixRotationAngle = true,
         }
     })
 end
