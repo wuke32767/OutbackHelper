@@ -196,7 +196,8 @@ namespace Celeste.Mod.OutbackHelper {
                     Vector2 vec2 = this.otherPortal.Center + new Vector2(0f, 6f) + this.directionsArray[portal.direction - 1] * 5f;
                     player.Position = vec2.Round();
                     float radians = (float)((double)(portal.portal.Rotation - this.portal.Rotation) + 3.141592653589793);
-                    Vector2 vector = new Vector2((float)Math.Cos((double)this.portal.Rotation), -(float)Math.Sin((double)this.portal.Rotation));
+                    //IDE0059 Remove unnecessary value assignment
+                    //Vector2 vector = new Vector2((float)Math.Cos((double)this.portal.Rotation), -(float)Math.Sin((double)this.portal.Rotation));
                     List<Solid> list = base.Scene.CollideAll<Solid>(new Rectangle((int)portal.X, (int)portal.Y, (int)this.directionsArray[portal.direction - 1].X * 8, (int)this.directionsArray[portal.direction - 1].Y * 8));
                     List<SolidTiles> list2 = base.Scene.CollideAll<SolidTiles>(new Rectangle((int)portal.X, (int)portal.Y, (int)this.directionsArray[portal.direction - 1].X * 8, (int)this.directionsArray[portal.direction - 1].Y * 8));
                     foreach (Entity entity in base.Scene.Tracker.GetEntities<Platform>()) {
