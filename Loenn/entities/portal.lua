@@ -112,4 +112,23 @@ function portal.rectangle(room, entity)
     end
 end
 
+function portal.rotate(room, entity, direction)
+    local directionsLookup = {
+        [0] = "None",
+        [1] = "Up",
+        [2] = "Left",
+        [3] = "Down",
+        [4] = "Right",
+        ["None"] = 0,
+        ["Up"] = 1,
+        ["Left"] = 2,
+        ["Down"] = 3,
+        ["Right"] = 4,
+    }
+
+    local dir = entity.direction or "None"
+    dir = (directionsLookup[dir] + direction + 5) % 5
+    entity.direction = directionsLookup[dir]
+    return true
+end
 return portal
