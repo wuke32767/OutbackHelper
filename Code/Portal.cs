@@ -64,6 +64,7 @@ namespace Celeste.Mod.OutbackHelper {
             this.light.Visible = true;
             this.fixRotationAngle = data.Bool("fixRotationAngle");
             this.cornerGlideProtection = data.Bool("cornerGlideProtection");
+            this.moveCamera = data.Bool("moveCamera");
         }
 
 
@@ -174,6 +175,14 @@ namespace Celeste.Mod.OutbackHelper {
 
 
         private void OnPlayer(Player player) {
+            void updateCameraPos(Player player, Vector2 oldPos) {
+                var camera = player.SceneAs<Level>().Camera;
+                var viewport = camera.Viewport;
+                var position = camera.Position + player.Position - oldPos;
+                position.X = MathHelper.Clamp(position.X, level.Bounds.Left, level.Bounds.Right - viewport.Width);
+                position.Y = MathHelper.Clamp(position.Y, level.Bounds.Top, level.Bounds.Bottom - viewport.Height);
+                camera.position = position;
+            }
             bool flag = this.teleportInsideCooldown <= 0f && otherPortal != null;
             if (flag) {
                 Portal portal = (Portal)this.otherPortal;
@@ -182,7 +191,11 @@ namespace Celeste.Mod.OutbackHelper {
                     this.portal.Play("teleport", true, false);
                     portal.portal.Play("teleport", true, false);
                     Vector2 vec = this.otherPortal.Center + new Vector2(0f, 6f);
+                    var oldPos = player.Position;
                     player.Position = vec.Round();
+                    if (moveCamera) {
+                        updateCameraPos(player, oldPos);
+                    }
                 }
                 bool flag3 = portal.direction != 0;
                 if (flag3) {
@@ -198,7 +211,11 @@ namespace Celeste.Mod.OutbackHelper {
                         }
                     }
                     Vector2 vec2 = this.otherPortal.Center + new Vector2(0f, 6f) + this.directionsArray[portal.direction - 1] * 5f;
+                    var oldPos = player.Position;
                     player.Position = vec2.Round();
+                    if (this.moveCamera) {
+                        updateCameraPos(player, oldPos);
+                    }
                     //IDE0059 Remove unnecessary value assignment
                     //Vector2 vector = new Vector2((float)Math.Cos((double)this.portal.Rotation), -(float)Math.Sin((double)this.portal.Rotation));
                     List<Solid> list = base.Scene.CollideAll<Solid>(new Rectangle((int)portal.X, (int)portal.Y, (int)this.directionsArray[portal.direction - 1].X * 8, (int)this.directionsArray[portal.direction - 1].Y * 8));
@@ -396,6 +413,9 @@ namespace Celeste.Mod.OutbackHelper {
 
 
         private bool cornerGlideProtection;
+
+
+        private bool moveCamera;
 
 
         private enum ReadyColors {
