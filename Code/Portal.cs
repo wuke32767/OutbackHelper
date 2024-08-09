@@ -63,6 +63,7 @@ namespace Celeste.Mod.OutbackHelper {
             }
             this.light.Visible = true;
             this.fixRotationAngle = data.Bool("fixRotationAngle");
+            this.cornerGlideProtection = data.Bool("cornerGlideProtection");
         }
 
 
@@ -221,6 +222,14 @@ namespace Celeste.Mod.OutbackHelper {
                     }
                     int facingInt = (directionsArray[direction - 1].X == directionsArray[portal.direction - 1].X) ? -(int)player.Facing : (int)player.Facing;
                     player.Facing = (Facings)facingInt;
+
+                    if (cornerGlideProtection) {
+                        if (player.wallSpeedRetentionTimer > 0f) {
+                            player.wallSpeedRetentionTimer = 0f;
+                            player.Speed.X = player.wallSpeedRetained;
+                        }
+                    }
+
                     if (fixRotationAngle) {
                         static int realloc(int old) => old switch {
                             2 => 3,
@@ -384,6 +393,9 @@ namespace Celeste.Mod.OutbackHelper {
 
 
         private bool fixRotationAngle;
+
+
+        private bool cornerGlideProtection;
 
 
         private enum ReadyColors {

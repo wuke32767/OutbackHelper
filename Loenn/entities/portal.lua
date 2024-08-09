@@ -60,6 +60,7 @@ for i, j in pairs(directions) do
             direction = i,
             cooldownTimer = 0.0,
             fixRotationAngle = true,
+            cornerGlideProtection = false,
         }
     })
 end
