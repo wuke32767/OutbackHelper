@@ -63,7 +63,7 @@ namespace Celeste.Mod.OutbackHelper {
             }
             this.light.Visible = true;
             this.fixRotationAngle = data.Bool("fixRotationAngle");
-            this.cornerGlideProtection = data.Bool("cornerGlideProtection");
+            this.wallSpeedRetentionProtection = data.Bool("wallSpeedRetentionProtection");
             this.moveCamera = data.Bool("moveCamera");
         }
 
@@ -240,7 +240,7 @@ namespace Celeste.Mod.OutbackHelper {
                     int facingInt = (directionsArray[direction - 1].X == directionsArray[portal.direction - 1].X) ? -(int)player.Facing : (int)player.Facing;
                     player.Facing = (Facings)facingInt;
 
-                    if (cornerGlideProtection) {
+                    if (wallSpeedRetentionProtection) {
                         if (player.wallSpeedRetentionTimer > 0f) {
                             player.wallSpeedRetentionTimer = 0f;
                             player.Speed.X = player.wallSpeedRetained;
@@ -412,7 +412,7 @@ namespace Celeste.Mod.OutbackHelper {
         private bool fixRotationAngle;
 
 
-        private bool cornerGlideProtection;
+        private bool wallSpeedRetentionProtection;
 
 
         private bool moveCamera;
