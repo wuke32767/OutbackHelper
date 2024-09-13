@@ -61,7 +61,6 @@ for i, j in pairs(directions) do
             cooldownTimer = 0.0,
             fixRotationAngle = true,
             wallSpeedRetentionProtection = false,
-            moveCamera = false,
         }
     })
 end
